@@ -43,3 +43,7 @@ build/
 .mypy_cache/
 .coverage
 htmlcov/
+
+# Supabase try-out scripts from supabase/README.md
+supabase/supabase.mjs
+supabase/example.mjs
