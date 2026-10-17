@@ -12,3 +12,5 @@ This project fixes that with a UBC-specific platform. Students build a profile o
 - Semantic matching with embeddings, plus recommendations you can explain
 - The invitation generator that writes a decent first email
 - Opportunity discovery, the stretch goal
+
+DEMO
