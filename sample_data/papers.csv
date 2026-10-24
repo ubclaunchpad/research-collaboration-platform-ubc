@@ -1,0 +1,31 @@
+researcher_id,title,year,doi,citations
+1,Sequential Model-Based Optimization for General Algorithm Configuration,2011,https://doi.org/10.1007/978-3-642-25566-3_40,2464
+1,"Multiagent systems: algorithmic, game-theoretic, and logical foundations",2009,https://doi.org/10.5860/choice.46-5662,1731
+1,Auto-WEKA,2013,https://doi.org/10.1145/2487575.2487629,1354
+2,MULTI‐DOCUMENT SUMMARIZATION OF EVALUATIVE TEXT,2012,https://doi.org/10.1111/j.1467-8640.2012.00417.x,243
+2,Extracting knowledge from evaluative text,2005,https://doi.org/10.1145/1088622.1088626,202
+2,Abstractive Summarization of Product Reviews Using Discourse Structure,2014,https://doi.org/10.3115/v1/d14-1168,190
+3,Explainable Artificial Intelligence in education,2022,https://doi.org/10.1016/j.caeai.2022.100074,849
+3,Probabilistic assessment of user's emotions in educational games,2002,https://doi.org/10.1080/08839510290030390,498
+3,Using Bayesian Networks to Manage Uncertainty in Student Modeling,2002,https://doi.org/10.1023/a:1021258506583,493
+4,Affordances: Clarifying and Evolving a Concep.,2000,,384
+4,"A comparison of static, adaptive, and adaptable menus",2004,https://doi.org/10.1145/985692.985704,293
+4,"Creating Augmented and Virtual Reality Applications: Current Practices, Challenges, and Opportunities",2020,https://doi.org/10.1145/3313831.3376722,278
+5,The Role of Affective Touch in Human-Robot Interaction: Human Intent and Expectations in Touching the Haptic Creature,2011,https://doi.org/10.1007/s12369-011-0126-7,311
+5,Do it yourself haptics: part I,2007,https://doi.org/10.1109/m-ra.2007.907921,208
+5,Meet me where i'm gazing,2014,https://doi.org/10.1145/2559636.2559656,204
+6,Mitigating Sybils in Federated Learning Poisoning,2018,https://doi.org/10.48550/arxiv.1808.04866,385
+6,Biscotti: A Blockchain System for Private and Secure Federated Learning,2020,https://doi.org/10.1109/tpds.2020.3044223,354
+6,The Limitations of Federated Learning in Sybil Settings,2020,,265
+7,How transferable are features in deep neural networks?,2014,https://doi.org/10.48550/arxiv.1411.1792,6061
+7,Deep neural networks are easily fooled: High confidence predictions for unrecognizable images,2015,https://doi.org/10.1109/cvpr.2015.7298640,3257
+7,Understanding Neural Networks Through Deep Visualization,2015,https://doi.org/10.48550/arxiv.1506.06579,1415
+8,Learning influence probabilities in social networks,2010,https://doi.org/10.1145/1718487.1718518,1031
+8,CELF++,2011,https://doi.org/10.1145/1963192.1963217,870
+8,Exploratory mining and pruning optimizations of constrained associations rules,1998,https://doi.org/10.1145/276304.276307,718
+9,CodaMosa: Escaping Coverage Plateaus in Test Generation with Pre-trained Large Language Models,2023,https://doi.org/10.1109/icse48619.2023.00085,306
+9,PerfFuzz: automatically generating pathological inputs,2018,https://doi.org/10.1145/3213846.3213874,159
+9,General LTL Specification Mining (T),2015,https://doi.org/10.1109/ase.2015.71,142
+10,Certified Robustness to Adversarial Examples with Differential Privacy,2019,https://doi.org/10.1109/sp.2019.00044,723
+10,XRay: Enhancing the Web's Transparency with Differential Correlation,2014,https://doi.org/10.48550/arxiv.1407.2323,69
+10,Sunlight,2015,https://doi.org/10.1145/2810103.2813614,48
