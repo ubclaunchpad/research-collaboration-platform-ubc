@@ -1,8 +1,5 @@
--- Only UBC email addresses (@ubc.ca and any *.ubc.ca subdomain) may have an
--- account. Enforced here, not just in the frontend, because anyone can call
--- Supabase's sign-up endpoint directly.
---
--- To change the allowed endings, edit the condition in this function.
+-- Only allow UBC emails (@ubc.ca and *.ubc.ca) to sign up.
+-- Done in the database so it can't be skipped by calling the Supabase API directly.
 -- To undo: drop trigger enforce_ubc_email on auth.users;
 
 create or replace function public.enforce_ubc_email()

@@ -1,6 +1,6 @@
--- Run in the Supabase SQL Editor after applying the migration.
--- Everything is rolled back at the end, so no users are left behind.
--- Expected result: the final NOTICE says "all UBC email checks passed".
+-- Run in the Supabase SQL Editor after the migration.
+-- Rolls back at the end so no test users are kept.
+-- Should print "all UBC email checks passed".
 
 begin;
 
@@ -35,7 +35,7 @@ begin
     if sqlerrm like 'FAIL:%' then raise; end if;
   end;
 
-  -- changing an existing UBC user to a non-UBC address must fail
+  -- changing to a non-UBC email should fail too
   begin
     update auth.users set email = 'a@gmail.com' where email = 'a@ubc.ca';
     raise exception 'FAIL: email change to gmail was accepted';
