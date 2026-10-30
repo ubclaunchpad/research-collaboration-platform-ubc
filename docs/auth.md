@@ -60,9 +60,9 @@ Always check `error` first.
 |---|---|
 | Email not confirmed yet | `error.message` is `Email not confirmed` |
 | Wrong email or password | `error.message` is `Invalid login credentials` |
-| Not a UBC email | Supabase only says `Database error saving new user` (status 500), not the real reason |
+| Not a UBC email | `error.message` is `Only UBC email addresses (@ubc.ca and subdomains) are allowed` (status 500) |
 
-Because of that last one, check the email in the form **before** calling `signUp`, so people get a clear message:
+The status is a 500 even though it's the user's mistake, so check the email in the form **before** calling `signUp`. That way people get a clear message right away:
 
 ```ts
 const isUbcEmail = (email: string) => {
