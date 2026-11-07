@@ -18,3 +18,4 @@ npm ci
 | `npm run build` | Type-check and build to `dist/` |
 | `npm run preview` | Serve the production build locally |
 | `npm run lint` | Lint with oxlint |
+| `npm test` | Run frontend tests with Vitest |
