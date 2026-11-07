@@ -11,18 +11,19 @@ class adapter(ABC):
         pass
     
     @abstractclassmethod
-    def normalize(self, response) -> Researcher | Lab | Publication:
+    def normalize(self, response):
         pass
     
     def store(self, 
-              response: Researcher | Lab | Publication,
+              response: dict,
               source: Literal["Dept_List", "OpenAlex", "Semantic_Scholar", "Prof_Pages"]):
-        try:
-            data = response.model_dump()
-            data["source"] = source
-            print("store successed")
-        except e:
-            raise ValidationError("response isn't one of Researcher, Lab or Publication from schema")
+        
+        if source not in ["Dept_List", "OpenAlex", "Semantic_Scholar", "Prof_Pages"]:
+            raise ValueError(f"source must be one of {["Dept_List", "OpenAlex", "Semantic_Scholar", "Prof_Pages"]}")
+        response["source"] = source
+        with open(f"source/{source}", mode='w', encoding=utf-8) as f:
+            json.dump(response, f, indent=4)
+        
         
     
     
