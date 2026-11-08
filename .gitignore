@@ -49,4 +49,4 @@ supabase/supabase.mjs
 supabase/example.mjs
 
 # Data
-data
+data/
