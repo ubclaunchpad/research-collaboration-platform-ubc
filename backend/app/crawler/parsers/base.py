@@ -3,7 +3,6 @@ Base parser class for all department sites.
 """
 
 from dataclasses import dataclass, asdict, field
-from typing import Optional
 
 
 @dataclass
