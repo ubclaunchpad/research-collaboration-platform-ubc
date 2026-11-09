@@ -2,7 +2,7 @@
 Base parser class for all department sites.
 """
 
-from dataclasses import dataclass, asdict, field
+from dataclasses import asdict, dataclass, field
 
 
 @dataclass

@@ -2,8 +2,10 @@
 Parser for the Computer Science department's faculty page.
 """
 
-from bs4 import BeautifulSoup
 from urllib.parse import urljoin
+
+from bs4 import BeautifulSoup
+
 from .base import Professor
 
 # Base URL to resolve relative profile links

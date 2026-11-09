@@ -3,8 +3,9 @@ Orchestrates the scraping process for a given URL and saves the extracted data.
 """
 
 import json
-import requests
 from pathlib import Path
+
+import requests
 from parsers.cs_parser import parse_cs_department
 
 PARSERS_REGISTRY = {
