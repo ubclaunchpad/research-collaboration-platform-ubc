@@ -1,7 +1,6 @@
 from abc import ABC, abstractclassmethod
 from pydantic import BaseModel
 from typing import Literal
-from model import *
 import json
 
 class adapter(ABC):
