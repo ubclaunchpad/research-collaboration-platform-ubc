@@ -55,8 +55,10 @@ async def main():
         html = await crawler.fetch()
         result = crawler.normalize(html)
         print(result.name, result.title, result.email)
+        crawler.store(result.model_dump(), "Prof_Pages")
     finally:
         await client.close()
+        
 if __name__ == "__main__":
     
     asyncio.run(main())
