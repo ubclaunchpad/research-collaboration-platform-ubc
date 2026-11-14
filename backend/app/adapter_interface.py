@@ -7,7 +7,7 @@ import json
 class adapter(ABC):
     
     @abstractclassmethod
-    def fetch(self, client):
+    async def fetch(self, client):
         pass
     
     @abstractclassmethod
