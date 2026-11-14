@@ -6,11 +6,14 @@ from time import monotonic
 import httpx
 
 class SourcePolicy(BaseModel):
-    request_per_second: int
-    interval: float = PrivateAttr(default=1/request_per_second)
+    request_per_second: int = Field(gt=0)
     max_attempts: int = Field(default=4, gt=0)
-    next_request: float = 0                                     # time until next request
-    lock: asyncio.Lock = Field(default_factory=asyncio.Lock)
+    _next_request: float = PrivateAttr(default=0)                                    # time until next request
+    _lock: asyncio.Lock = PrivateAttr(default_factory=asyncio.Lock)
+    
+    @property
+    def interval(self)->float:
+        return 1 / self.request_per_second
         
 class HTTPClient:
     def __init__(self, sources: dict[str, SourcePolicy]):
@@ -23,10 +26,10 @@ class HTTPClient:
         policy: SourcePolicy = self.sources.get(source)
         if policy.max_attempts < 1:
             raise ValueError("attemps must be greater than or equal to 1")
-        async with policy.lock:
+        async with policy._lock:
             for attempt in range(policy.max_attempts):
-                await asyncio.sleep(max(0, limit.next_request - monotonic()))
-                policy.next_request = monotonic() + policy.interval
+                await asyncio.sleep(max(0, policy._next_request - monotonic()))
+                policy._next_request = monotonic() + policy.interval
                 
                 try:
                     response = await self.client.get(url)
