@@ -2,6 +2,7 @@ from abc import ABC, abstractclassmethod
 from pydantic import BaseModel
 from typing import Literal
 import json
+import os
 
 class adapter(ABC):
     
@@ -20,7 +21,8 @@ class adapter(ABC):
         if source not in ["Dept_List", "OpenAlex", "Semantic_Scholar", "Prof_Pages"]:
             raise ValueError(f"source must be one of {["Dept_List", "OpenAlex", "Semantic_Scholar", "Prof_Pages"]}")
         response["source"] = source
-        with open(f"source/{source}", mode='w', encoding=utf-8) as f:
+        os.makedirs("source", exist_ok=True)
+        with open(f"source/{source}", mode='w', encoding="utf-8") as f:
             json.dump(response, f, indent=4)
         
         
