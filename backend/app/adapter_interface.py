@@ -1,6 +1,5 @@
-import json
-import os
 from abc import ABC, abstractclassmethod
+from pathlib import Path
 from typing import Literal
 
 
@@ -15,7 +14,7 @@ class adapter(ABC):
 
     def store(
         self,
-        response: dict,
+        response: bytes,
         source: Literal["Dept_List", "OpenAlex", "Semantic_Scholar", "Prof_Pages"],
     ):
 
@@ -23,7 +22,8 @@ class adapter(ABC):
             raise ValueError(
                 f"source must be one of {['Dept_List', 'OpenAlex', 'Semantic_Scholar', 'Prof_Pages']}"
             )
-        response["source"] = source
-        os.makedirs("source", exist_ok=True)
-        with open(f"source/{source}", mode="w", encoding="utf-8") as f:
-            json.dump(response, f, indent=4)
+        directory = Path("source") / source
+        directory.mkdir(parents=True, exist_ok=True)
+
+        file_path = directory / source
+        file_path.write_bytes(response)
