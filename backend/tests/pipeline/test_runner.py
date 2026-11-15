@@ -6,9 +6,9 @@ from app.pipeline.store import JobStore
 
 
 def recording_stage_funcs(calls, fail_on=None):
-    """Stage funcs that log every call and optionally raise for a given
-    (professor, stage) pair. `fail_on` is a set of (professor, stage) tuples
-    that raise instead of succeeding.
+    """Fake step functions that log each call to `calls`.
+
+    Any (professor, step) pair in `fail_on` raises an error instead.
     """
     fail_on = fail_on or set()
 
@@ -44,17 +44,17 @@ def test_rerun_skips_completed_stages_unless_forced(tmp_path):
         runner.run("CS", ["Alice"])
     assert len(calls) == len(STAGES)
 
-    # "Restart": fresh store/runner against the same db file.
+    # Simulate a restart: new store + runner, same db file.
     with JobStore(db_path) as store:
         runner = PipelineRunner(store, recording_stage_funcs(calls))
         summary = runner.run("CS", ["Alice"])
     assert summary.outcomes[0].completed_stages == list(STAGES)
-    assert len(calls) == len(STAGES)  # nothing re-ran
+    assert len(calls) == len(STAGES)  # nothing ran again
 
     with JobStore(db_path) as store:
         runner = PipelineRunner(store, recording_stage_funcs(calls))
         runner.run("CS", ["Alice"], force=True)
-    assert len(calls) == 2 * len(STAGES)  # forced re-run hit every stage
+    assert len(calls) == 2 * len(STAGES)  # force=True ran every step again
 
 
 def test_failed_stage_retries_until_limit_then_stays_failed(tmp_path):
@@ -73,9 +73,9 @@ def test_failed_stage_retries_until_limit_then_stays_failed(tmp_path):
     assert outcome.failed_stage == "api"
     assert outcome.completed_stages == ["listing"]
     api_calls = [c for c in calls if c == ("Alice", "api")]
-    assert len(api_calls) == 3  # one attempt per run, three runs total
+    assert len(api_calls) == 3  # 1 try per run, 3 runs
 
-    # A fourth run should not attempt the exhausted stage again.
+    # 4th run: out of retries, so api shouldn't run again.
     with JobStore(db_path) as store:
         runner = PipelineRunner(
             store, recording_stage_funcs(calls, fail_on=fail_on), max_attempts=3
@@ -123,13 +123,13 @@ def test_resume_after_a_crash_continues_from_last_completed_stage(tmp_path):
         with pytest.raises(KeyboardInterrupt):
             runner.run("CS", ["Alice"])
 
-    # listing/api finished and were persisted before the crash.
+    # listing and api finished and were saved before the crash.
     with JobStore(db_path) as store:
         assert store.get("CS", "Alice", "listing").status == "done"
         assert store.get("CS", "Alice", "api").status == "done"
         assert store.get("CS", "Alice", "pages").status == "running"
 
-    # "Restart" with a fixed pages implementation.
+    # Restart with a working pages step.
     calls.clear()
     with JobStore(db_path) as store:
         runner = PipelineRunner(store, recording_stage_funcs(calls))
@@ -138,7 +138,7 @@ def test_resume_after_a_crash_continues_from_last_completed_stage(tmp_path):
     outcome = summary.outcomes[0]
     assert outcome.ok
     assert outcome.completed_stages == list(STAGES)
-    # listing/api were skipped on resume, not re-run.
+    # listing and api were skipped, not run again.
     assert calls == [("Alice", "pages"), ("Alice", "merge"), ("Alice", "save")]
 
 

@@ -62,7 +62,7 @@ def test_seed_pending_creates_row_but_never_overwrites_progress(tmp_path):
 
         store.seed_pending("CS", "Alice", "listing", max_attempts=3)
         job = store.get("CS", "Alice", "listing")
-        assert job.status == DONE  # untouched by the later seed call
+        assert job.status == DONE  # seeding again didn't overwrite it
 
 
 def test_list_jobs_filters_by_department(tmp_path):

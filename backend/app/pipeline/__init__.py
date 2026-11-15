@@ -1,9 +1,10 @@
-"""Per-professor crawl pipeline: listing -> api -> pages -> merge -> save.
+"""Pipeline that crawls a department one professor at a time.
 
-Each stage of each professor is tracked as a job row (see store.JobStore) so
-a run can be killed and resumed, a broken professor doesn't block the rest
-of the department, and failed stages retry up to a limit before being left
-for manual review.
+Each professor goes through 5 steps: listing -> api -> pages -> merge -> save.
+We save the progress of every step to a small database, so:
+- if the script stops halfway, running it again picks up where it left off
+- if one professor fails, the rest of the department still gets crawled
+- a failed step is retried a few times before we give up on it
 """
 
 from app.pipeline.runner import PipelineRunner, ProfessorOutcome, RunSummary

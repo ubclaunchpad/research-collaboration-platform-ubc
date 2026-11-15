@@ -1,11 +1,12 @@
-"""Runs the listing -> api -> pages -> merge -> save pipeline per professor.
+"""Runs the 5 pipeline steps for each professor, in order.
 
-Each (professor, stage) attempt is recorded in the JobStore before it runs.
-A stage that raises is caught here: the error is recorded, that professor
-stops at the failed stage for this run, and the runner moves on to the next
-professor. Re-running the same department skips stages already marked done
-(unless `force=True`) and retries stages that are pending/running/failed,
-as long as they haven't exhausted `max_attempts`.
+Before a step runs, we mark it as "running" in the JobStore.
+If a step throws an error, we save the error, stop that professor for this
+run, and move on to the next professor.
+
+When you run the same department again:
+- steps that are already "done" are skipped (use force=True to redo them)
+- steps that failed or never finished are tried again, up to max_attempts
 """
 
 from __future__ import annotations
@@ -93,7 +94,7 @@ class PipelineRunner:
             self.store.mark_running(department, professor, stage, self.max_attempts)
             try:
                 result = self.stage_funcs[stage](professor, dict(context))
-            except Exception as exc:  # noqa: BLE001 - isolate one prof's failure
+            except Exception as exc:  # noqa: BLE001 - one prof failing shouldn't stop the others
                 self.store.mark_failed(department, professor, stage, str(exc))
                 outcome.failed_stage = stage
                 outcome.error = str(exc)

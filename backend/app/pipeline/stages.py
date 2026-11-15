@@ -1,14 +1,15 @@
-"""Stage definitions for the per-professor crawl pipeline.
+"""The 5 steps of the pipeline.
 
-Each stage function takes (professor, context) where `context` is a dict of
-the JSON-serializable results of every stage that already ran for that
-professor in this run (keyed by stage name), and returns this stage's own
-JSON-serializable result. Raise on failure; the runner records the error and
-retries on a later run.
+Every step function gets two things:
+- professor: the professor's name
+- context: the results of the steps that already ran, e.g. context["listing"]
 
-The implementations below are placeholders wiring the five stages together
-end to end. Swap them out (pass your own mapping into PipelineRunner) once
-the real listing/API/page-scraping logic exists.
+It returns its own result, which has to be JSON-friendly (dicts, lists,
+strings, numbers) so we can save it. If something goes wrong, just raise an
+error and the runner will record it and retry later.
+
+These are placeholders for now. Once the real scraping code is ready, pass
+the real functions into PipelineRunner instead.
 """
 
 from __future__ import annotations
@@ -23,12 +24,12 @@ class StageFunc(Protocol):
 
 
 def fetch_listing(professor: str, context: dict[str, object]) -> object:
-    """Discover the professor's publication/profile listing."""
+    """Find the professor's profile / list of papers."""
     raise NotImplementedError("plug in the real listing source for " + professor)
 
 
 def fetch_api(professor: str, context: dict[str, object]) -> object:
-    """Query an external API (e.g. a publications API) for this professor."""
+    """Look the professor up in an outside API (e.g. OpenAlex)."""
     raise NotImplementedError("plug in the real API lookup for " + professor)
 
 
@@ -38,12 +39,12 @@ def fetch_pages(professor: str, context: dict[str, object]) -> object:
 
 
 def merge(professor: str, context: dict[str, object]) -> object:
-    """Combine the listing/api/pages results into one record."""
+    """Combine the results from listing, api and pages into one record."""
     raise NotImplementedError("plug in the real merge logic for " + professor)
 
 
 def save(professor: str, context: dict[str, object]) -> object:
-    """Persist the merged record (e.g. to Supabase)."""
+    """Save the combined record (e.g. to Supabase)."""
     raise NotImplementedError("plug in the real save step for " + professor)
 
 

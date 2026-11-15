@@ -1,9 +1,10 @@
-"""SQLite-backed job table for pipeline stages.
+"""Keeps track of pipeline progress in a SQLite table.
 
-One row per (department, professor, stage). Status is one of pending,
-running, done, failed. A row's `result` holds the JSON-serialized output of
-that stage, so a resumed run can skip finished stages while still feeding
-their output forward to later stages.
+There's one row for each department + professor + step.
+status is one of: pending, running, done, failed.
+result stores what the step returned (as JSON). That way, when we resume a
+run, we can skip the finished steps and still pass their results to the
+next ones.
 """
 
 from __future__ import annotations
@@ -72,7 +73,7 @@ def _row_to_record(row: sqlite3.Row) -> JobRecord:
 
 
 class JobStore:
-    """Tracks pipeline job state for every (department, professor, stage)."""
+    """Reads and writes the status of each department + professor + step."""
 
     def __init__(self, db_path: str | Path = "pipeline_state.db") -> None:
         self._conn = sqlite3.connect(str(db_path))
@@ -113,10 +114,10 @@ class JobStore:
     def seed_pending(
         self, department: str, professor: str, stage: str, max_attempts: int
     ) -> None:
-        """Ensure a row exists for this stage so it's visible before it runs.
+        """Add a "pending" row for this step if there isn't one yet.
 
-        No-op if a row already exists (at any status) - this must never
-        clobber progress made by a previous run.
+        If a row already exists, leave it alone so we don't wipe out
+        progress from an earlier run.
         """
         self._conn.execute(
             """
@@ -132,7 +133,7 @@ class JobStore:
     def mark_running(
         self, department: str, professor: str, stage: str, max_attempts: int
     ) -> int:
-        """Record a new attempt starting. Returns the attempt number."""
+        """Mark the step as running and add 1 to attempts. Returns the new count."""
         existing = self.get(department, professor, stage)
         attempts = (existing.attempts if existing else 0) + 1
         self._conn.execute(

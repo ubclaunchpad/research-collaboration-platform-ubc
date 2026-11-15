@@ -1,4 +1,6 @@
-"""One-command entry point: run the full pipeline for a department.
+"""Run the whole pipeline for a department with one command.
+
+Examples:
 
     uv run python -m app.pipeline.cli "Computer Science" \\
         --professors "Alice Smith,Bob Lee"
@@ -6,10 +8,9 @@
     uv run python -m app.pipeline.cli "Computer Science" \\
         --professors-file roster.json --force
 
-`--professors-file` points at a JSON file containing a list of names. The
-department's professor roster isn't sourced here on purpose: wiring that up
-to the real UBC directory is a separate piece of work from the pipeline
-runner built in this module.
+--professors-file is a JSON file with a list of names.
+For now you pass in the professor names yourself. Getting them from the
+real UBC directory will be its own ticket.
 """
 
 from __future__ import annotations
