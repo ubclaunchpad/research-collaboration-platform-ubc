@@ -49,7 +49,7 @@ One row per pair. 10 made-up students, each paired with 3 professors: one clear 
 
 ## Rating
 
-Two team members rate every pair first, without seeing each other's answer. Where they differ they talk it through and write the outcome in `settled_note`. Volunteers re-rate later (RES-34, RES-74).
+Two team members rate every pair first, without seeing each other's answer. Hide the `case` and `why_tricky` columns while rating so they do not sway the answer. Where they differ they talk it through and write the outcome in `settled_note`. Volunteers re-rate later (RES-34, RES-74).
 
 The rating columns are empty until the raters fill them in.
 
