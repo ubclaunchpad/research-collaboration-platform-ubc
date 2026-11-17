@@ -2,68 +2,62 @@
 Parser for the Computer Science department's faculty page.
 """
 
-from urllib.parse import urljoin
-
 from bs4 import BeautifulSoup
 
-from .base import Professor
-
-# Base URL to resolve relative profile links
-BASE_URL = "https://www.cs.ubc.ca"
+from .base import BaseDepartmentParser, Professor
 
 
-def parse_cs_department(html_content: str) -> list[Professor]:
-    soup = BeautifulSoup(html_content, "html.parser")
-    professors = []
+class CSParser(BaseDepartmentParser):
+    def __init__(self):
+        super().__init__(
+            department_name="Computer Science", base_url="https://www.cs.ubc.ca"
+        )
 
-    table_bodies = soup.select("table.views-table tbody")
+    def parse(self, html_content: str) -> list[Professor]:
+        soup = BeautifulSoup(html_content, "html.parser")
+        professors = []
 
-    if not table_bodies:
-        return []
+        tbodies = soup.select("table.views-table tbody")
+        if not tbodies:
+            return []
 
-    for table_body in table_bodies:
-        rows = table_body.find_all("tr")
+        for tbody in tbodies:
+            for row in tbody.find_all("tr"):
+                name_tag = row.find("a", class_="contact-content-name")
+                if not name_tag:
+                    continue
 
-        for row in rows:
-            # 1. Name & Profile URL
-            name_tag = row.find("a", class_="contact-content-name")
-            if not name_tag:
-                continue  # Skip empty or malformed rows
+                name = name_tag.get_text(strip=True)
+                profile_url = self.resolve_url(name_tag.get("href", ""))
 
-            name = name_tag.get_text(strip=True)
-            raw_url = name_tag.get("href", "")
-            profile_url = urljoin(BASE_URL, raw_url)
+                title_tag = row.find("span", class_="contact-content-job-title")
+                title = title_tag.get_text(strip=True) if title_tag else "Unknown Title"
 
-            # 2. Title
-            title_tag = row.find("span", class_="contact-content-job-title")
-            title = title_tag.get_text(strip=True) if title_tag else "Unknown Title"
+                emails = [
+                    tag.get_text(strip=True)
+                    for tag in row.find_all(
+                        "a", href=lambda h: h and h.startswith("mailto:")
+                    )
+                ]
 
-            # 3. Emails
-            emails = []
-            email_tags = row.find_all(
-                "a", href=lambda href: href and href.startswith("mailto:")
-            )
-            if email_tags:
-                # Extract text from every mailto link into a list
-                emails = [tag.get_text(strip=True) for tag in email_tags]
+                lab_names = []
+                lab_td = row.find(
+                    "td", headers="view-field-research-groups-table-column"
+                )
+                if lab_td:
+                    lab_names = [
+                        link.get_text(strip=True) for link in lab_td.find_all("a")
+                    ]
 
-            # 4. Lab Name (Research Groups)
-            lab_names = []
-            lab_td = row.find("td", headers="view-field-research-groups-table-column")
-            if lab_td:
-                # Find all anchor tags inside the cell and extract their text into a list
-                lab_links = lab_td.find_all("a")
-                if lab_links:
-                    lab_names = [link.get_text(strip=True) for link in lab_links]
+                professors.append(
+                    Professor(
+                        name=name,
+                        title=title,
+                        department=self.department_name,
+                        profile_url=profile_url,
+                        emails=emails,
+                        lab_names=lab_names,
+                    )
+                )
 
-            prof = Professor(
-                name=name,
-                title=title,
-                department="Computer Science",
-                profile_url=profile_url,
-                emails=emails,
-                lab_names=lab_names,
-            )
-            professors.append(prof)
-
-    return professors
+        return professors

@@ -6,16 +6,20 @@ import json
 from pathlib import Path
 
 import requests
-from parsers.cs_parser import parse_cs_department
+from parsers.base import BaseDepartmentParser
+from parsers.cs_parser import CSParser
 
-PARSERS_REGISTRY = {
-    "cs": parse_cs_department,
+PARSERS_REGISTRY: dict[str, BaseDepartmentParser] = {
+    "cs": CSParser(),
 }
+
+BASE_DIR = Path(__file__).resolve().parent
 
 
 def get_html(url: str, dept_id: str, force_refresh: bool = False) -> str:
     """Fetches HTML content from a URL with caching."""
-    cache_dir = Path("data/raw")
+
+    cache_dir = BASE_DIR / "data" / "raw"
     cache_dir.mkdir(parents=True, exist_ok=True)
     cache_file = cache_dir / f"{dept_id}_raw.html"
 
@@ -34,7 +38,7 @@ def get_html(url: str, dept_id: str, force_refresh: bool = False) -> str:
 
 def export_to_json(professors: list, dept_id: str):
     """Exports structured data to JSON."""
-    out_dir = Path("data/output")
+    out_dir = BASE_DIR / "data" / "output"
     out_dir.mkdir(parents=True, exist_ok=True)
     out_file = out_dir / f"{dept_id}_professors.json"
 
@@ -54,13 +58,14 @@ def main():
     pilot_dept = "cs"
     pilot_url = "https://www.cs.ubc.ca/people/faculty"
 
+    # set force_refresh = True to refetch the HTML from the live URL instead of using cached data
     html_content = get_html(pilot_url, pilot_dept, force_refresh=False)
 
-    parser_func = PARSERS_REGISTRY.get(pilot_dept)
-    if not parser_func:
+    parser = PARSERS_REGISTRY.get(pilot_dept)
+    if not parser:
         raise ValueError(f"No parser registered for {pilot_dept}")
 
-    professors = parser_func(html_content)
+    professors = parser.parse(html_content)
 
     export_to_json(professors, pilot_dept)
 
