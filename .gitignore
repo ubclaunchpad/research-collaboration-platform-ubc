@@ -44,6 +44,10 @@ build/
 .coverage
 htmlcov/
 
+# Local merge output (backend/app/merge/README.md)
+merged.db
+merged.json
+
 # Supabase try-out scripts from supabase/README.md
 supabase/supabase.mjs
 supabase/example.mjs
