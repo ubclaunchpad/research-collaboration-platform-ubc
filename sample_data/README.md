@@ -1,8 +1,8 @@
 # Sample data
 
-10 real UBC Computer Science researchers, with their research areas and three well-cited papers each. It is a rough sample for testing Matching, Backend and Frontend. It is not clean or complete.
+10 real UBC Computer Science researchers, with three well-cited papers each. It is a rough sample for testing Matching, Backend and Frontend. It is not clean or complete.
 
-Profile fields come from the public UBC CS faculty pages (https://www.cs.ubc.ca/people/faculty). Papers come from OpenAlex (https://openalex.org), matched by name and UBC affiliation, because the UBC pages do not list papers. Pulled on 2026-10-24.
+Profile fields are facts from the public UBC CS faculty pages (https://www.cs.ubc.ca/people/faculty). Emails, research areas and Google Scholar links are left out on purpose, since the repo is public and we don't copy text from UBC pages. Papers come from OpenAlex (https://openalex.org), matched by name and UBC affiliation, because the UBC pages do not list papers. Pulled on 2026-10-24.
 
 ## Files
 
@@ -18,12 +18,9 @@ Profile fields come from the public UBC CS faculty pages (https://www.cs.ubc.ca/
 | `full_name` | Name as shown on the UBC CS page |
 | `title` | Job title on the UBC CS page |
 | `department` | Always Computer Science in this sample |
-| `email` | Contact email on the UBC CS page |
-| `research_areas` | Areas listed on the UBC CS page, separated by `; ` |
 | `research_groups` | Research groups listed on the page, separated by `; ` (can be empty) |
 | `profile_url` | UBC CS profile page |
 | `personal_page` | Researcher's own site, empty if none is listed |
-| `google_scholar` | Google Scholar link from the UBC page, empty if none is listed |
 | `openalex_id` | Author id in OpenAlex |
 
 ## papers.csv
@@ -39,5 +36,4 @@ Profile fields come from the public UBC CS faculty pages (https://www.cs.ubc.ca/
 ## Known rough edges
 
 - Papers are the 3 most cited per person, so they skew old. They are not a list of current work.
-- Joanna McGrenere's `email` is the department head address (`head@cs.ubc.ca`), because she is Co-Head.
-- Research areas are broad UBC labels, not fine-grained topics.
+- For research topics, use OpenAlex topics (see `app/openalex`), not UBC page text.

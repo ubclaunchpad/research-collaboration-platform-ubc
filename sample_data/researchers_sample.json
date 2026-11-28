@@ -3,12 +3,6 @@
     "full_name": "Kevin Leyton-Brown",
     "title": "Professor",
     "department": "Computer Science",
-    "email": "kevinlb@cs.ubc.ca",
-    "research_areas": [
-      "Algorithmic Game Theory",
-      "Algorithms",
-      "Artificial Intelligence & Machine Learning"
-    ],
     "research_groups": [
       "Algorithms Lab",
       "Artificial Intelligence",
@@ -16,7 +10,6 @@
     ],
     "profile_url": "https://www.cs.ubc.ca/people/kevin-leyton-brown",
     "personal_page": "https://www.cs.ubc.ca/~kevinlb/",
-    "google_scholar": "http://scholar.google.com/citations?user=_4dnp0IAAAAJ&hl=en",
     "openalex_id": "https://openalex.org/A5089807699",
     "papers": [
       {
@@ -44,14 +37,6 @@
     "full_name": "Giuseppe Carenini",
     "title": "Professor & MDS Director",
     "department": "Computer Science",
-    "email": "carenini@cs.ubc.ca",
-    "research_areas": [
-      "Artificial Intelligence & Machine Learning",
-      "Human-Computer Interaction",
-      "Human‐AI Interaction",
-      "Natural Language Processing",
-      "Visualization"
-    ],
     "research_groups": [
       "Artificial Intelligence",
       "Human-AI Interaction",
@@ -60,7 +45,6 @@
     ],
     "profile_url": "https://www.cs.ubc.ca/people/giuseppe-carenini",
     "personal_page": "https://www.cs.ubc.ca/~carenini/",
-    "google_scholar": "http://scholar.google.com/citations?user=HNNL22kAAAAJ&hl=en",
     "openalex_id": "https://openalex.org/A5049259877",
     "papers": [
       {
@@ -88,12 +72,6 @@
     "full_name": "Cristina Conati",
     "title": "Professor",
     "department": "Computer Science",
-    "email": "conati@cs.ubc.ca",
-    "research_areas": [
-      "Artificial Intelligence & Machine Learning",
-      "Human-Computer Interaction",
-      "Human‐AI Interaction"
-    ],
     "research_groups": [
       "Artificial Intelligence",
       "Human-AI Interaction",
@@ -101,7 +79,6 @@
     ],
     "profile_url": "https://www.cs.ubc.ca/people/cristina-conati",
     "personal_page": "",
-    "google_scholar": "https://scholar.google.com/citations?user=Ytp9oFQAAAAJ&hl=en",
     "openalex_id": "https://openalex.org/A5024712028",
     "papers": [
       {
@@ -129,18 +106,12 @@
     "full_name": "Joanna McGrenere",
     "title": "Co-Head, Professor",
     "department": "Computer Science",
-    "email": "head@cs.ubc.ca",
-    "research_areas": [
-      "Human-Computer Interaction",
-      "Human‐AI Interaction"
-    ],
     "research_groups": [
       "Multimodal User EXperience",
       "Designing Interactive Technologies"
     ],
     "profile_url": "https://www.cs.ubc.ca/people/joanna-mcgrenere",
     "personal_page": "https://www.cs.ubc.ca/~joanna/",
-    "google_scholar": "http://scholar.google.com/citations?user=ZRWlokAAAAAJ&hl=en",
     "openalex_id": "https://openalex.org/A5016459516",
     "papers": [
       {
@@ -168,18 +139,12 @@
     "full_name": "Karon MacLean",
     "title": "Professor",
     "department": "Computer Science",
-    "email": "maclean@cs.ubc.ca",
-    "research_areas": [
-      "Human-Computer Interaction",
-      "Robotics"
-    ],
     "research_groups": [
       "Multimodal User EXperience",
       "Sensory Perception & Interaction Research Group"
     ],
     "profile_url": "https://www.cs.ubc.ca/people/karon-maclean",
     "personal_page": "https://www.cs.ubc.ca/~maclean/",
-    "google_scholar": "http://scholar.google.com/citations?user=qANkJFwAAAAJ&hl=en",
     "openalex_id": "https://openalex.org/A5061277210",
     "papers": [
       {
@@ -207,24 +172,12 @@
     "full_name": "Ivan Beschastnikh",
     "title": "Associate Professor",
     "department": "Computer Science",
-    "email": "bestchai@cs.ubc.ca",
-    "research_areas": [
-      "Artificial Intelligence & Machine Learning",
-      "Formal Methods",
-      "Human-Computer Interaction",
-      "Program Analysis & Verification",
-      "Security & Privacy",
-      "Software Engineering",
-      "Systems & Networking",
-      "Visualization"
-    ],
     "research_groups": [
       "Software Practices Lab",
       "Systems Research, construed broadly"
     ],
     "profile_url": "https://www.cs.ubc.ca/people/ivan-beschastnikh",
     "personal_page": "https://www.cs.ubc.ca/~bestchai/",
-    "google_scholar": "http://scholar.google.com/citations?user=iKnYSo8AAAAJ&hl=en",
     "openalex_id": "https://openalex.org/A5064061802",
     "papers": [
       {
@@ -252,17 +205,12 @@
     "full_name": "Jeff Clune",
     "title": "Professor",
     "department": "Computer Science",
-    "email": "jeff.clune@ubc.ca",
-    "research_areas": [
-      "Artificial Intelligence & Machine Learning"
-    ],
     "research_groups": [
       "Artificial Intelligence",
       "Machine Learning"
     ],
     "profile_url": "https://www.cs.ubc.ca/people/jeff-clune",
     "personal_page": "http://jeffclune.com/",
-    "google_scholar": "https://scholar.google.com/citations?user=5TZ7f5wAAAAJ&hl=en",
     "openalex_id": "https://openalex.org/A5112191507",
     "papers": [
       {
@@ -290,19 +238,11 @@
     "full_name": "Laks V.S. Lakshmanan",
     "title": "Professor",
     "department": "Computer Science",
-    "email": "laks@cs.ubc.ca",
-    "research_areas": [
-      "Algorithms",
-      "Artificial Intelligence & Machine Learning",
-      "Data Management & Mining",
-      "Natural Language Processing"
-    ],
     "research_groups": [
       "Data Management and Mining Lab"
     ],
     "profile_url": "https://www.cs.ubc.ca/people/laks-vs-lakshmanan",
     "personal_page": "https://www.cs.ubc.ca/~laks/",
-    "google_scholar": "http://scholar.google.com/citations?user=_RCsaOsAAAAJ&hl=en",
     "openalex_id": "https://openalex.org/A5061340195",
     "papers": [
       {
@@ -330,20 +270,12 @@
     "full_name": "Caroline Lemieux",
     "title": "Assistant Professor",
     "department": "Computer Science",
-    "email": "clemieux@cs.ubc.ca",
-    "research_areas": [
-      "Security & Privacy",
-      "Programming Languages",
-      "Software Engineering",
-      "Program Analysis & Verification"
-    ],
     "research_groups": [
       "Security and Privacy Group",
       "Software Practices Lab"
     ],
     "profile_url": "https://www.cs.ubc.ca/people/caroline-lemieux",
     "personal_page": "https://www.carolemieux.com",
-    "google_scholar": "https://scholar.google.com/citations?user=SMRGdi0AAAAJ&hl=en",
     "openalex_id": "https://openalex.org/A5069023395",
     "papers": [
       {
@@ -371,13 +303,6 @@
     "full_name": "Mathias Lécuyer",
     "title": "Associate Professor",
     "department": "Computer Science",
-    "email": "mathias.lecuyer@ubc.ca",
-    "research_areas": [
-      "Artificial Intelligence & Machine Learning",
-      "Security & Privacy",
-      "Statistical & Theoretical Machine Learning",
-      "Systems & Networking"
-    ],
     "research_groups": [
       "Machine Learning",
       "Security and Privacy Group",
@@ -385,7 +310,6 @@
     ],
     "profile_url": "https://www.cs.ubc.ca/people/mathias-lecuyer",
     "personal_page": "http://mathias.lecuyer.me",
-    "google_scholar": "https://scholar.google.com/citations?user=WeIvMTUAAAAJ&hl=en",
     "openalex_id": "https://openalex.org/A5050942051",
     "papers": [
       {
