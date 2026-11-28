@@ -47,3 +47,6 @@ htmlcov/
 # Supabase try-out scripts from supabase/README.md
 supabase/supabase.mjs
 supabase/example.mjs
+
+# Data
+data/
